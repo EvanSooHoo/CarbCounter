@@ -22,19 +22,14 @@
         tools:layout_editor_absoluteX="148dp"
         tools:layout_editor_absoluteY="311dp" />
 
-    <TextView
+    <EditText
         android:id="@+id/carbInput"
         android:layout_width="wrap_content"
-        android:layout_height="31dp"
-        android:text="Total Carbs:"
-        tools:layout_editor_absoluteX="116dp"
-        tools:layout_editor_absoluteY="266dp" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="76dp"
-        android:layout_height="34dp"
-        tools:layout_editor_absoluteX="218dp"
-        tools:layout_editor_absoluteY="266dp" />
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        tools:layout_editor_absoluteX="85dp"
+        tools:layout_editor_absoluteY="247dp" />
 
 </android.support.constraint.ConstraintLayout>
