@@ -7,14 +7,16 @@ import android.widget.Button
 import android.widget.Toast
 
 class MainActivity : AppCompatActivity() {
-    var sum = 0;
+    var sum:  Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
             var input = carbInput.text
-            Toast.makeText(this,input,Toast.LENGTH_LONG).show()
+            var inputInt = input.toString().toInt()
+            sum += inputInt
+            Toast.makeText(this,sum,Toast.LENGTH_LONG).show()
 
         }
 
