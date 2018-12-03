@@ -4,32 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteY="81dp">
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginBottom="28dp"
+        app:layout_constraintBottom_toBottomOf="@+id/carbInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
         android:text="Enter"
-        tools:layout_editor_absoluteX="148dp"
-        tools:layout_editor_absoluteY="311dp" />
+        app:layout_constraintEnd_toEndOf="@+id/carbInput"
+        app:layout_constraintStart_toStartOf="@+id/carbInput"
+        app:layout_constraintTop_toBottomOf="@+id/carbInput" />
 
     <EditText
         android:id="@+id/carbInput"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="218dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginRight="58dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Carb to add:"
-        tools:layout_editor_absoluteX="85dp"
-        tools:layout_editor_absoluteY="247dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
