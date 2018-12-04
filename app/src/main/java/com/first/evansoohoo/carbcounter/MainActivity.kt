@@ -13,10 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            var input = carbInput.text
-            println("value of input is $input")
-            var inputInt = input.toString().toInt()
-            sum += inputInt
+            println("HEY WE ENTERED THE STATEMENT")
+            var inputInt: Int = carbInput.text.toString().toInt() //this line is wrong
+            sum+= inputInt
             Toast.makeText(this,sum,Toast.LENGTH_LONG).show()
 
         }
