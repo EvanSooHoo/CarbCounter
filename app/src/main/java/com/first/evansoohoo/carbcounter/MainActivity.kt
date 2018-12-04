@@ -15,8 +15,9 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             println("HEY WE ENTERED THE STATEMENT")
             var inputInt: Int = carbInput.text.toString().toInt() //this line is wrong
-            sum+= inputInt
-            Toast.makeText(this,sum,Toast.LENGTH_LONG).show()
+            sum+= inputInt //WAIT IT'S ACTUALLY THESE THAT MESS UP
+            println("Now the value of sum is $sum")
+            //Toast.makeText(this,sum,Toast.LENGTH_LONG).show()
 
         }
 
