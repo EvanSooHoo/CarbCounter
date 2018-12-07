@@ -13,14 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            println("HEY WE ENTERED THE STATEMENT")
-            var inputInt: Int = carbInput.text.toString().toInt() //this line is wrong
-            sum+= inputInt //WAIT IT'S ACTUALLY THESE THAT MESS UP
-            println("Now the value of sum is $sum")
+            var inputInt: Int = carbInput.text.toString().toInt()
+            sum+= inputInt
             Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
 
         }
-
-
     }
 }
