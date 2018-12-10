@@ -6,6 +6,10 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
 
+import android.arch.persistence.room.Entity
+import android.arch.persistence.room.ColumnInfo
+import android.arch.persistence.room.PrimaryKey
+
 class MainActivity : AppCompatActivity() {
     //var sum:  Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
