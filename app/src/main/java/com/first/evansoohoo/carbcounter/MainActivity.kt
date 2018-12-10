@@ -17,6 +17,12 @@ class MainActivity : AppCompatActivity() {
             sum+= inputInt
             Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
 
+            @Entity
+            data class User(
+                    @PrimaryKey var uid: Int,
+                    @ColumnInfo(name = "first_name") var firstName: String?,
+                    @ColumnInfo(name = "last_name") var lastName: String?
+            )
         }
     }
 
@@ -38,4 +44,6 @@ class MainActivity : AppCompatActivity() {
         var id: Long = 0
     }
     */
+
+
 }
