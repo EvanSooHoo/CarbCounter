@@ -20,8 +20,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    @Entity(tableName = "list_categories")
-    data class ListCategory(@ColumnInfo(name="category_name") var categoryName: String,
-                            @ColumnInfo(name="id") @PrimaryKey(autoGenerate = true) var id: Long = 0)
+    //@Entity(tableName = "list_categories") //These three lines of code are the problem
+    //data class ListCategory(@ColumnInfo(name="category_name") var categoryName: String,
+     //                       @ColumnInfo(name="id") @PrimaryKey(autoGenerate = true) var id: Long = 0)
 
+    /*
+    @Entity(tableName = "all_food_list")
+    class Food (@ColumnInfo(name = "food_name") var foodName: String = "",
+                @ColumnInfo(name = "food_desc") var foodDesc: String = "",
+                @ColumnInfo(name = "protein") var protein: Double = 0.0,
+                @ColumnInfo(name = "carbs") var carbs: Double = 0.0,
+                @ColumnInfo(name = "fat") var fat: Double = 0.0,
+                @ColumnInfo(name = "calories") var calories: Double = 0.0)
+    {
+        @ColumnInfo(name = "id")
+        @PrimaryKey(autoGenerate = true)
+        var id: Long = 0
+    }
+    */
 }
