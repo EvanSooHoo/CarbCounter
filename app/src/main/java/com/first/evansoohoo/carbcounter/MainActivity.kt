@@ -14,25 +14,11 @@ import android.arch.persistence.room.Query
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Database
+import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 
 class MainActivity : AppCompatActivity() {
     //var sum:  Int = 0
-    override fun onCreate(savedInstanceState: Bundle?) {
-        var sum:  Int = 0
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        button.setOnClickListener {
-            var inputInt: Int = carbInput.text.toString().toInt()
-            sum+= inputInt
-            Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
-
-
-
-
-        }
-    }
-
 
     @Entity
     data class User(
@@ -59,6 +45,27 @@ class MainActivity : AppCompatActivity() {
         @Delete
         fun delete(user: User)
     }
+
+    @Database(entities = arrayOf(User::class), version = 1)
+    abstract class AppDatabase : RoomDatabase() {
+        abstract fun userDao(): UserDao
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        var sum:  Int = 0
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        button.setOnClickListener {
+            var inputInt: Int = carbInput.text.toString().toInt()
+            sum+= inputInt
+            Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
+            val db = Room.databaseBuilder(
+                    applicationContext,
+                    AppDatabase::class.java, "database-name"
+            ).build()
+        }
+    }
+
 
 
 
