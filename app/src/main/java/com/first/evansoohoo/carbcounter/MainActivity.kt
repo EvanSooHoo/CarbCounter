@@ -67,19 +67,13 @@ class MainActivity : AppCompatActivity() {
                     AppDatabase::class.java, "database-name"
             ).build()
 
-            /*var thisUserDao: UserDao? = null
+            var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
             var User1 = User(uid=0,firstName="Evan", lastName="SooHoo")
-            thisUserDao = db?.UserDao()
+            thisUserDao = db?.userDao()
             with(thisUserDao){
                 this?.insertUser(User1)
             }
-            */
-
-
-
-
-
 
         }
     }
