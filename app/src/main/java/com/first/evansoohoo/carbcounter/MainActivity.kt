@@ -63,6 +63,10 @@ class MainActivity : AppCompatActivity() {
                     applicationContext,
                     AppDatabase::class.java, "database-name"
             ).build()
+            //val usersDao = db.getDatabase(application).wordDao()
+
+
+
         }
     }
 
