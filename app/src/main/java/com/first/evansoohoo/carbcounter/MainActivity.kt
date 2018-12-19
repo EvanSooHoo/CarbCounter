@@ -39,8 +39,11 @@ class MainActivity : AppCompatActivity() {
                 "last_name LIKE :last LIMIT 1")
         fun findByName(first: String, last: String): User
 
+        //@Insert
+        //fun insertAll(vararg users: User)
+
         @Insert
-        fun insertAll(vararg users: User)
+        fun insertUser(user: User )
 
         @Delete
         fun delete(user: User)
@@ -63,7 +66,18 @@ class MainActivity : AppCompatActivity() {
                     applicationContext,
                     AppDatabase::class.java, "database-name"
             ).build()
+
+            /*var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
+            var User1 = User(uid=0,firstName="Evan", lastName="SooHoo")
+            thisUserDao = db?.UserDao()
+            with(thisUserDao){
+                this?.insertUser(User1)
+            }
+            */
+
+
+
 
 
 
