@@ -2,6 +2,7 @@ package com.first.evansoohoo.carbcounter
 
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -16,6 +17,8 @@ import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+
+import org.jetbrains.anko.doAsync
 
 class MainActivity : AppCompatActivity() {
     //var sum:  Int = 0
@@ -59,6 +62,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
+            print("blahblahhey this is the print button")
             var inputInt: Int = carbInput.text.toString().toInt()
             sum+= inputInt
             Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
@@ -67,13 +71,23 @@ class MainActivity : AppCompatActivity() {
                     AppDatabase::class.java, "database-name"
             ).build()
 
+            //MyApp.database =  Room.databaseBuilder(this, AppDatabase::class.java, "db").allowMainThreadQueries().build()
+
+
+
             var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
             var User1 = User(uid=0,firstName="Evan", lastName="SooHoo")
+            Log.d("TAG", "Defined user. using separate thread")
             thisUserDao = db?.userDao()
-            with(thisUserDao){
-                this?.insertUser(User1)
+            doAsync {
+                with(thisUserDao) {
+                    this?.insertUser(User1)
+                    Log.d("TAG", "Just inserted entry")
+                }
             }
+
+
 
         }
     }
