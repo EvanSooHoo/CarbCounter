@@ -19,6 +19,7 @@ import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
     //var sum:  Int = 0
@@ -85,9 +86,11 @@ class MainActivity : AppCompatActivity() {
                     this?.insertUser(User1)
                     Log.d("TAG", "ES: Just inserted entry")
                     //this?.findByName("Evan","SooHoo")
-                    val allUserData = thisUserDao?.getAll()
-                    val entries = allUserData.size
-                    Log.d("TAG", "ES: Now the number of entries is %entries")
+                    uiThread {
+                        val allUserData = thisUserDao?.getAll()
+                        val entries = allUserData.size
+                        Log.d("TAG", "ES: Now the number of entries is %entries")
+                    }
                 }
             }
 
