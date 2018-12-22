@@ -78,12 +78,16 @@ class MainActivity : AppCompatActivity() {
             var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
             var User1 = User(uid=0,firstName="Evan", lastName="SooHoo")
-            Log.d("TAG", "Defined user. using separate thread")
+            Log.d("TAG", "ES: Defined user. using separate thread")
             thisUserDao = db?.userDao()
             doAsync {
                 with(thisUserDao) {
                     this?.insertUser(User1)
-                    Log.d("TAG", "Just inserted entry")
+                    Log.d("TAG", "ES: Just inserted entry")
+                    //this?.findByName("Evan","SooHoo")
+                    val allUserData = thisUserDao?.getAll()
+                    val entries = allUserData.size
+                    Log.d("TAG", "ES: Now the number of entries is %entries")
                 }
             }
 
