@@ -82,7 +82,8 @@ class MainActivity : AppCompatActivity() {
             Log.d("TAG", "ES: Defined user. using separate thread")
             thisUserDao = db?.userDao()
             doAsync {
-                with(thisUserDao) {
+                Log.d("TAG", "ES: ENTERED DOASYNC LOOP I WANT TO SEE THIS JFC")
+                with(thisUserDao) {//THIS is the part that we're not entering
                     this?.insertUser(User1)
                     Log.d("TAG", "ES: Just inserted entry")
                     //this?.findByName("Evan","SooHoo")
