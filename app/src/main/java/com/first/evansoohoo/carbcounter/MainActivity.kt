@@ -74,8 +74,6 @@ class MainActivity : AppCompatActivity() {
 
             //MyApp.database =  Room.databaseBuilder(this, AppDatabase::class.java, "db").allowMainThreadQueries().build()
 
-
-
             var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
             var User1 = User(uid=0,firstName="Evan", lastName="SooHoo")
@@ -83,8 +81,9 @@ class MainActivity : AppCompatActivity() {
             thisUserDao = db?.userDao()
             doAsync {
                 Log.d("TAG", "ES: ENTERED DOASYNC LOOP I WANT TO SEE THIS JFC")
-                with(thisUserDao) {//THIS is the part that we're not entering
-                    this?.insertUser(User1)
+                //with(thisUserDao) {//THIS is the part that we're not entering
+                    thisUserDao?.insertUser(User1)
+                    Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK")
                     Log.d("TAG", "ES: Just inserted entry")
                     //this?.findByName("Evan","SooHoo")
                     uiThread {
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                         val entries = allUserData.size
                         Log.d("TAG", "ES: Now the number of entries is %entries")
                     }
-                }
+                //}
             }
 
 
