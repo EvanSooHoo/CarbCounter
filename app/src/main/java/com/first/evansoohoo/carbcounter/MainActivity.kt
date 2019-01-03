@@ -33,6 +33,10 @@ class MainActivity : AppCompatActivity() {
 
     @Dao
     interface UserDao {
+
+        @Insert()
+        fun insertUser(user: User )
+
         @Query("SELECT * FROM user")
         fun getAll(): List<User>
 
@@ -45,9 +49,6 @@ class MainActivity : AppCompatActivity() {
 
         //@Insert
         //fun insertAll(vararg users: User)
-
-        @Insert()
-        fun insertUser(user: User )
 
         @Delete
         fun delete(user: User)
@@ -74,16 +75,17 @@ class MainActivity : AppCompatActivity() {
 
             //MyApp.database =  Room.databaseBuilder(this, AppDatabase::class.java, "db").allowMainThreadQueries().build()
 
-            var thisUserDao: UserDao? = null
+            //var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
-            var User1 = User(uid=0,firstName="Evan", lastName="SooHoo")
             Log.d("TAG", "ES: Defined user. using separate thread")
-            thisUserDao = db?.userDao()
+            var thisUserDao = db?.userDao()
             doAsync {
                 Log.d("TAG", "ES: ENTERED DOASYNC LOOP I WANT TO SEE THIS JFC")
-                with(thisUserDao) {//THIS is the part that we're not entering
+                with(thisUserDao) {
+                    var user1 = User(uid=0,firstName="Evan", lastName="SooHoo")
+                    var user2 = User(uid=1, firstName="dj", lastName="Trump")
                     Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK (attempting insertUser below)")
-                    thisUserDao?.insertUser(User1)
+                    thisUserDao?.insertUser(user2)
 
                     Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
                     //it never gets here
