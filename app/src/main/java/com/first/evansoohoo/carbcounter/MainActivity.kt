@@ -81,11 +81,11 @@ class MainActivity : AppCompatActivity() {
             thisUserDao = db?.userDao()
             doAsync {
                 Log.d("TAG", "ES: ENTERED DOASYNC LOOP I WANT TO SEE THIS JFC")
-                //with(thisUserDao) {//THIS is the part that we're not entering
+                with(thisUserDao) {//THIS is the part that we're not entering
                     Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK (attempting insertUser below)")
-                    //thisUserDao?.insertUser(User1)
+                    thisUserDao?.insertUser(User1)
 
-                    Log.d("TAG", "ES: Test to see if it ever gets past insertUser")
+                    Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
                     //it never gets here
                     Log.d("TAG", "ES: Just inserted entry")
                     //this?.findByName("Evan","SooHoo")
@@ -94,7 +94,7 @@ class MainActivity : AppCompatActivity() {
                         val entries = allUserData.size
                         Log.d("TAG", "ES: Now the number of entries is %entries")
                     }
-                //}
+                }
             }
 
 
