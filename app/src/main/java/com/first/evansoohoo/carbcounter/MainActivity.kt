@@ -17,6 +17,7 @@ import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
+import android.content.Context
 
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -59,6 +60,31 @@ class MainActivity : AppCompatActivity() {
         abstract fun userDao(): UserDao
     }
 
+    companion object {
+
+        /**
+         * The only instance
+         */
+        private var sInstance: AppDatabase? = null
+
+        /**
+         * Gets the singleton instance of SampleDatabase.
+         *
+         * @param context The context.
+         * @return The singleton instance of SampleDatabase.
+         */
+        @Synchronized
+        fun getInstance(context: Context): AppDatabase {
+            if (sInstance == null) {
+                sInstance = Room
+                        .databaseBuilder(context.applicationContext, AppDatabase::class.java, "example")
+                        .fallbackToDestructiveMigration()
+                        .build()
+            }
+            return sInstance!!
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         var sum:  Int = 0
         super.onCreate(savedInstanceState)
@@ -77,6 +103,31 @@ class MainActivity : AppCompatActivity() {
 
             //var thisUserDao: UserDao? = null
             //val usersDao = db.getDatabase(application).wordDao()
+
+            /*
+            ES: This is how the coder in android-room-example does it
+            mAdapter = BillAdapter(this@BillsActivity, mutableListOf())
+            bills_list.adapter = mAdapter
+
+            doAsync {
+
+                val database = AppDatabase.getInstance(context = this@BillsActivity)
+                val bills = database.billDao().all
+
+                uiThread {
+                   mAdapter!!.addAll(bills)
+                }
+            }
+
+            Unrelated, but this is how they do an insertion
+            private fun saveAmount(amount: String, customer: Customer) {
+                doAsync {
+                    val bill = Bill(amount = Integer.valueOf(amount), customerId = customer.uid)
+                    AppDatabase.getInstance(this@MainActivity).billDao().insert(bill)
+                }
+           }
+            */
+
             Log.d("TAG", "ES: Defined user. using separate thread")
             var thisUserDao = db?.userDao()
             doAsync {
@@ -98,8 +149,6 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
             }
-
-
 
         }
     }
