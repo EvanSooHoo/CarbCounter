@@ -57,33 +57,36 @@ class MainActivity : AppCompatActivity() {
 
     @Database(entities = arrayOf(User::class), version = 1)
     abstract class AppDatabase : RoomDatabase() {
+
         abstract fun userDao(): UserDao
-    }
 
-    companion object {
+        companion object {
 
-        /**
-         * The only instance
-         */
-        private var sInstance: AppDatabase? = null
+            /**
+             * The only instance
+             */
+            private var sInstance: AppDatabase? = null
 
-        /**
-         * Gets the singleton instance of SampleDatabase.
-         *
-         * @param context The context.
-         * @return The singleton instance of SampleDatabase.
-         */
-        @Synchronized
-        fun getInstance(context: Context): AppDatabase {
-            if (sInstance == null) {
-                sInstance = Room
-                        .databaseBuilder(context.applicationContext, AppDatabase::class.java, "example")
-                        .fallbackToDestructiveMigration()
-                        .build()
+            /**
+             * Gets the singleton instance of SampleDatabase.
+             *
+             * @param context The context.
+             * @return The singleton instance of SampleDatabase.
+             */
+            @Synchronized
+            fun getInstance(context: Context): AppDatabase {
+                if (sInstance == null) {
+                    sInstance = Room
+                            .databaseBuilder(context.applicationContext, AppDatabase::class.java, "example")
+                            .fallbackToDestructiveMigration()
+                            .build()
+                }
+                return sInstance!!
             }
-            return sInstance!!
         }
     }
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         var sum:  Int = 0
@@ -136,17 +139,21 @@ class MainActivity : AppCompatActivity() {
                     var user1 = User(uid=0,firstName="Evan", lastName="SooHoo")
                     var user2 = User(uid=1, firstName="dj", lastName="Trump")
                     Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK (attempting insertUser below)")
-                    thisUserDao?.insertUser(user2)
+                    //thisUserDao?.insertUser(user2) //Temporarily trying the room example approach
+                    AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user2)
 
                     Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
                     //it never gets here
                     Log.d("TAG", "ES: Just inserted entry")
                     //this?.findByName("Evan","SooHoo")
+
+                    /*
                     uiThread {
                         val allUserData = thisUserDao?.getAll()
                         val entries = allUserData.size
                         Log.d("TAG", "ES: Now the number of entries is %entries")
                     }
+                    */
                 }
             }
 
