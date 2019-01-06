@@ -144,7 +144,7 @@ class MainActivity : AppCompatActivity() {
 
                     Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
                     //it never gets here
-                    Log.d("TAG", "ES: Just inserted entry")
+                    Log.d("TAG", "ES: Just inserted entry") //actually, it does insert an entry the first time
                     //this?.findByName("Evan","SooHoo")
 
                     /*
