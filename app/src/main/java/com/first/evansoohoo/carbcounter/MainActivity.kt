@@ -86,8 +86,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         var sum:  Int = 0
         super.onCreate(savedInstanceState)
@@ -102,35 +100,6 @@ class MainActivity : AppCompatActivity() {
                     AppDatabase::class.java, "database-name"
             ).build()
 
-            //MyApp.database =  Room.databaseBuilder(this, AppDatabase::class.java, "db").allowMainThreadQueries().build()
-
-            //var thisUserDao: UserDao? = null
-            //val usersDao = db.getDatabase(application).wordDao()
-
-            /*
-            ES: This is how the coder in android-room-example does it
-            mAdapter = BillAdapter(this@BillsActivity, mutableListOf())
-            bills_list.adapter = mAdapter
-
-            doAsync {
-
-                val database = AppDatabase.getInstance(context = this@BillsActivity)
-                val bills = database.billDao().all
-
-                uiThread {
-                   mAdapter!!.addAll(bills)
-                }
-            }
-
-            Unrelated, but this is how they do an insertion
-            private fun saveAmount(amount: String, customer: Customer) {
-                doAsync {
-                    val bill = Bill(amount = Integer.valueOf(amount), customerId = customer.uid)
-                    AppDatabase.getInstance(this@MainActivity).billDao().insert(bill)
-                }
-           }
-            */
-
             Log.d("TAG", "ES: Defined user. using separate thread")
             var thisUserDao = db?.userDao()
             doAsync {
@@ -139,13 +108,15 @@ class MainActivity : AppCompatActivity() {
                     var user1 = User(uid=0,firstName="Evan", lastName="SooHoo")
                     var user2 = User(uid=1, firstName="dj", lastName="Trump")
                     Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK (attempting insertUser below)")
-                    //thisUserDao?.insertUser(user2) //Temporarily trying the room example approach
                     AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user2)
 
                     Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
                     //it never gets here
                     Log.d("TAG", "ES: Just inserted entry") //actually, it does insert an entry the first time
                     //this?.findByName("Evan","SooHoo")
+                    val allUserData = thisUserDao?.getAll()
+                    val entries = allUserData.size
+                    Log.d("TAG", "ES: Now the number of entries is $entries")
 
                     /*
                     uiThread {
