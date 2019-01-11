@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     @Entity
     data class User(
             @PrimaryKey var uid: Int,
-            @ColumnInfo(name = "first_name") var firstName: String?,
+            @ColumnInfo(name = "carb_count") var carbCount: Int?,
             @ColumnInfo(name = "last_name") var lastName: String?
     )
 
@@ -44,9 +44,9 @@ class MainActivity : AppCompatActivity() {
         @Query("SELECT * FROM user WHERE uid IN (:userIds)")
         fun loadAllByIds(userIds: IntArray): List<User>
 
-        @Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-                "last_name LIKE :last LIMIT 1")
-        fun findByName(first: String, last: String): User
+        //@Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
+        //        "last_name LIKE :last LIMIT 1")
+        //fun findByName(first: String, last: String): User
 
         //@Insert
         //fun insertAll(vararg users: User)
@@ -105,14 +105,14 @@ class MainActivity : AppCompatActivity() {
             doAsync {
                 Log.d("TAG", "ES: ENTERED DOASYNC LOOP I WANT TO SEE THIS JFC")
                 with(thisUserDao) {
-                    var user1 = User(uid=0,firstName="Evan", lastName="SooHoo")
-                    var user2 = User(uid=1, firstName="dj", lastName="Trump")
+                    var user1 = User(uid=0, carbCount=sum, lastName="wu")
+
                     Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK (attempting insertUser below)")
-                    AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user2)
+                    //AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user2)
 
                     Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
                     //it never gets here
-                    Log.d("TAG", "ES: Just inserted entry") //actually, it does insert an entry the first time
+                    Log.d("TAG", "ES: Just inserted entry with sum $sum") //actually, it does insert an entry the first time
                     //this?.findByName("Evan","SooHoo")
                     val allUserData = thisUserDao?.getAll()
                     val entries = allUserData.size
