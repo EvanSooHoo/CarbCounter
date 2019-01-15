@@ -129,6 +129,10 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+
+        button2.setOnClickListener {
+            Log.d("TAG", "ES: You hit the save button")
+        }
     }
 
 }
