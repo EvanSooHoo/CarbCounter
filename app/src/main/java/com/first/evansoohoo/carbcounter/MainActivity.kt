@@ -95,6 +95,12 @@ class MainActivity : AppCompatActivity() {
             var inputInt: Int = carbInput.text.toString().toInt()
             sum+= inputInt
             Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
+
+
+        }
+
+        button2.setOnClickListener {
+            Log.d("TAG", "ES: You hit the save button")
             val db = Room.databaseBuilder(
                     applicationContext,
                     AppDatabase::class.java, "database-name"
@@ -127,11 +133,6 @@ class MainActivity : AppCompatActivity() {
                     */
                 }
             }
-
-        }
-
-        button2.setOnClickListener {
-            Log.d("TAG", "ES: You hit the save button")
         }
     }
 
