@@ -120,9 +120,10 @@ class MainActivity : AppCompatActivity() {
                     //it never gets here
                     Log.d("TAG", "ES: Just inserted entry with sum $sum") //actually, it does insert an entry the first time
                     //this?.findByName("Evan","SooHoo")
-                    val allUserData = thisUserDao?.getAll()
+                    val allUserData = thisUserDao?.getAll() //ES: Error identified. It doesn't do anything for getAll
                     val entries = allUserData.size
                     Log.d("TAG", "ES: Now the number of entries is $entries")
+                    Log.d("TAG", "ES: The 0th value of alluserdata is $allUserData.get(0)")
 
                     /*
                     uiThread {
