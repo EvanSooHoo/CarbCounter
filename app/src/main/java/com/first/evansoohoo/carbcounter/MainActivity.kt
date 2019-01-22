@@ -23,7 +23,6 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
-    //var sum:  Int = 0
 
     @Entity
     data class User(
@@ -91,12 +90,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
-            print("blahblahhey this is the print button")
             var inputInt: Int = carbInput.text.toString().toInt()
             sum+= inputInt
             Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
-
-
         }
 
         button2.setOnClickListener {
@@ -109,29 +105,24 @@ class MainActivity : AppCompatActivity() {
             Log.d("TAG", "ES: Defined user. using separate thread")
             var thisUserDao = db?.userDao()
             doAsync {
-                Log.d("TAG", "ES: ENTERED DOASYNC LOOP I WANT TO SEE THIS JFC")
+                Log.d("TAG", "ES: ENTERED DOASYNC LOOP")
                 with(thisUserDao) {
                     var user1 = User(uid=0, carbCount=sum, lastName="wu")
 
-                    Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY JFK (attempting insertUser below)")
-                    //AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user2)
-
-                    Log.d("TAG", "ES: Test to see if it ever gets past insertUser") //it never gets here
-                    //it never gets here
-                    Log.d("TAG", "ES: Just inserted entry with sum $sum") //actually, it does insert an entry the first time
-                    //this?.findByName("Evan","SooHoo")
+                    Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY (attempting insertUser below)")
+                    Log.d("TAG", "ES: Test to see if it ever gets past insertUser")
+                    Log.d("TAG", "ES: Just inserted entry with sum $sum")
                     val allUserData = thisUserDao?.getAll() //ES: Error identified. It doesn't do anything for getAll
                     val entries = allUserData.size
                     Log.d("TAG", "ES: Now the number of entries is $entries")
                     Log.d("TAG", "ES: The 0th value of alluserdata is $allUserData.get(0)")
 
-                    /*
                     uiThread {
-                        val allUserData = thisUserDao?.getAll()
+                        val allUserData = thisUserDao?.getAll() //Error: It doesn't get here either
                         val entries = allUserData.size
-                        Log.d("TAG", "ES: Now the number of entries is %entries")
+                        Log.d("TAG", "ES: Now the number of entries is $entries")
                     }
-                    */
+
                 }
             }
         }
