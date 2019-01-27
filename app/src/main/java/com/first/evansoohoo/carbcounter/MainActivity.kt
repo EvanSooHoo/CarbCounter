@@ -111,7 +111,8 @@ class MainActivity : AppCompatActivity() {
 
                     Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY (attempting insertUser below)")
                     Log.d("TAG", "ES: Test to see if it ever gets past insertUser")
-                    this?.insertUser(user1)
+                    //this?.insertUser(user1)
+                    AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user1)
                     Log.d("TAG", "ES: Just inserted entry with sum $sum")
                     val allUserData = thisUserDao?.getAll() //ES: Error identified. It doesn't do anything for getAll
                     Log.d("TAG", "ES: What if we just print it directly? size is $allUserData.size")
