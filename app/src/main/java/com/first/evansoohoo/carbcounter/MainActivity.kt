@@ -10,26 +10,6 @@ import android.database.sqlite.*
 
 import android.content.Context
 
-class FeedReaderDbHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
-
-    override fun onCreate(db: SQLiteDatabase) {
-        db.execSQL(FeedReaderContract.SQL_CREATE_ENTRIES)
-    }
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        // This database is only a cache for online data, so its upgrade policy is
-        // to simply to discard the data and start over
-        db.execSQL(FeedReaderContract.SQL_DELETE_ENTRIES)
-        onCreate(db)
-    }
-    override fun onDowngrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        onUpgrade(db, oldVersion, newVersion)
-    }
-    companion object {
-        // If you change the database schema, you must increment the database version.
-        const val DATABASE_VERSION = 1
-        const val DATABASE_NAME = "FeedReader.db"
-    }
-}
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +25,40 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             Log.d("TAG", "ES: You hit the save button")
+            val dbHelper = FeedReaderDbHelper(context)
+
+            // Gets the data repository in write mode
+            val db = dbHelper.writableDatabase
+
+            // Create a new map of values, where column names are the keys
+            val values = ContentValues().apply {
+                put(FeedEntry.COLUMN_NAME_TITLE, title)
+                put(FeedEntry.COLUMN_NAME_SUBTITLE, subtitle)
+            }
+
+            // Insert the new row, returning the primary key value of the new row
+            val newRowId = db?.insert(FeedEntry.TABLE_NAME, null, values)
+
+            // Define a projection that specifies which columns from the database
+            // you will actually use after this query.
+            val projection = arrayOf(BaseColumns._ID, FeedEntry.COLUMN_NAME_TITLE, FeedEntry.COLUMN_NAME_SUBTITLE)
+
+            // Filter results WHERE "title" = 'My Title'
+            val selection = "${FeedEntry.COLUMN_NAME_TITLE} = ?"
+            val selectionArgs = arrayOf("My Title")
+
+            // How you want the results sorted in the resulting Cursor
+            val sortOrder = "${FeedEntry.COLUMN_NAME_SUBTITLE} DESC"
+
+            val cursor = db.query(
+                    FeedEntry.TABLE_NAME,   // The table to query
+                    projection,             // The array of columns to return (pass null to get all)
+                    selection,              // The columns for the WHERE clause
+                    selectionArgs,          // The values for the WHERE clause
+                    null,                   // don't group the rows
+                    null,                   // don't filter by row groups
+                    sortOrder               // The sort order
+            )
 
 
         }
