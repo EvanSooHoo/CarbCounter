@@ -1,5 +1,8 @@
 package com.first.evansoohoo.carbcounter
 
+import com.first.evansoohoo.carbcounter.FeedReaderContract
+import com.first.evansoohoo.carbcounter.FeedReaderDbHelper
+
 import kotlinx.android.synthetic.main.activity_main.*
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -25,6 +28,7 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             Log.d("TAG", "ES: You hit the save button")
+            var context: Context? = null
             val dbHelper = FeedReaderDbHelper(context)
 
             // Gets the data repository in write mode
