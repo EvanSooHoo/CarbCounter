@@ -1,12 +1,13 @@
 package com.first.evansoohoo.carbcounter
 
-import android.support.v7.app.AppCompatActivity
-import android.os.Bundle
+class PreviousCarbEntries {
 
-class PreviousCarbEntries : AppCompatActivity() {
+    var carbNumber: Int? = null
+    var dataString: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_previous_carb_entries)
+    constructor(carbNumber: Int, dataString: String) {
+        this.carbNumber = carbNumber
+        this.dataString = dataString
     }
+
 }
