@@ -31,16 +31,8 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             Log.d("TAG", "ES: You hit the save button")
-            //CarbDatabaseManager cdm()
-            /*
-            var dbHelper = DatabaseHelper(context)
-            db = dbHelper.writableDatabase  // getWritableDatabase()
 
-            db!!.insert("JSANotesTable", "", contentValues)
-            db!!.update("JSANotesTable", contentValues, "Id=?", arrayOf(id.toString()))
 
-            db!!.execSQL("CREATE TABLE IF NOT EXISTS JSANotesTable (Id INTEGER PRIMARY KEY, Title TEXT, Content TEXT);")
-            */
         }
     }
 

@@ -53,4 +53,14 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
 }
+/* ES: 3-31-2019 Left off here.  Attempting to use the SQL jetbrainsexposed library
+repositories {
+    jcenter()
+}
+dependencies {
+    compile 'com.google.guava:guava:27.0.1-android'
+    compile 'org.jetbrains.exposed:exposed:0.13.2'
+}
+*/
