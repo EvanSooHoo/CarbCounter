@@ -6,21 +6,16 @@ import android.util.Log
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
+import android.database.sqlite.*
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.PrimaryKey
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Query
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+import android.widget.*
 
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class MainActivity : AppCompatActivity() {
 
@@ -37,37 +32,8 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             Log.d("TAG", "ES: You hit the save button")
-            val db = Room.databaseBuilder(
-                    applicationContext,
-                    AppDatabase::class.java, "database-name"
-            ).build()
 
-            Log.d("TAG", "ES: Defined user. using separate thread")
-            var thisUserDao = db?.userDao()
-            doAsync {
-                Log.d("TAG", "ES: ENTERED DOASYNC LOOP")
-                with(thisUserDao) {
-                    var user1 = User(uid=0, carbCount=sum, lastName="wu")
 
-                    Log.d("TAG", "ES: I ALSO WANT TO SEE THIS TO INSERT ENTRY (attempting insertUser below)")
-                    Log.d("TAG", "ES: Test to see if it ever gets past insertUser")
-                    //this?.insertUser(user1)
-                    AppDatabase.getInstance(this@MainActivity).userDao().insertUser(user1)
-                    Log.d("TAG", "ES: Just inserted entry with sum $sum")
-                    val allUserData = thisUserDao?.getAll() //ES: Error identified. It doesn't do anything for getAll
-                    Log.d("TAG", "ES: What if we just print it directly? size is $allUserData.size")
-                    val entries = allUserData.size
-                    Log.d("TAG", "ES: Now the number of entries is $entries")
-                    Log.d("TAG", "ES: The 0th value of alluserdata is $allUserData.get(0)")
-
-                    uiThread {
-                        val allUserData = thisUserDao?.getAll() //Error: It doesn't get here either
-                        val entries = allUserData.size
-                        Log.d("TAG", "ES: Now the number of entries is $entries")
-                    }
-
-                }
-            }
         }
     }
 
