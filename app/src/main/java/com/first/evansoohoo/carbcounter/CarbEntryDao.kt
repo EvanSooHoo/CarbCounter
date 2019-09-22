@@ -1,31 +1,19 @@
 package com.first.evansoohoo.carbcounter
 
-import android.arch.persistence.room.Dao
-import android.arch.persistence.room.Delete
-import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Query
+import androidx.room.Dao
+import androidx.room.Query
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 
 @Dao
-//interface CarbEntryDao {
-abstract class CarbEntryDao {
+interface CarbEntryDAO {
 
-    //@Insert() //4 29 2019: current problem is that this will say "type of the paramter must be a class annotated with entity"
-    //abstract fun insertCarbEntry(user: CarbEntry )
-/*
-    @Query("SELECT * FROM carbentry")
-    fun getAll(): List<CarbEntry>
+    @Query("SELECT * from carb_table ORDER BY CarbEntry ASC")
+    fun getAllCarbEntries(): List<CarbEntry>
 
-    @Query("SELECT * FROM carbentry WHERE uid IN (:carbEntryIds)")
-    fun loadAllByIds(carbEntryIds: IntArray): List<CarbEntry>
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insert(CarbEntry: CarbEntry)
 
-    //@Query("SELECT * FROM user WHERE first_name LIKE :first AND " +
-    //        "last_name LIKE :last LIMIT 1")
-    //fun findByName(first: String, last: String): User
-
-    //@Insert
-    //fun insertAll(vararg users: User)
-
-    @Delete
-    fun delete(user: User)
-    */
+    @Query("DELETE FROM carb_table")
+    suspend fun deleteAll()
 }

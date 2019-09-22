@@ -1,12 +1,10 @@
 package com.first.evansoohoo.carbcounter
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.ColumnInfo
 
-@Entity(tableName = "CarbEntry")
-data class User(
-        @PrimaryKey var uid: Int,
-        @ColumnInfo(name = "carb_count") var carbCount: Int?,
-        @ColumnInfo(name = "date_string") var dateString: String?
-)
+import androidx.room.Entity
+
+import androidx.room.PrimaryKey
+
+@Entity(tableName = "carb_table")
+class CarbEntry(@PrimaryKey @ColumnInfo(name = "carbentry") val word: String)

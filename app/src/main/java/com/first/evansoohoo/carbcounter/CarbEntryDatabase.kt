@@ -1,37 +1,38 @@
 package com.first.evansoohoo.carbcounter
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.Room
-import android.arch.persistence.room.RoomDatabase
 import android.content.Context
+import androidx.room.Database
+import androidx.room.Room
+import androidx.room.RoomDatabase
 
-@Database(entities = arrayOf(User::class), version = 1)
-abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun carbEntryDao(): CarbEntryDao
+// Annotates class to be a Room Database with a table (entity) of the Carb class
+@Database(entities = arrayOf(CarbEntry::class), version = 1)
+public abstract class CarbRoomDatabase : RoomDatabase() {
+
+    abstract fun CarbEntry(): CarbEntryDAO
 
     companion object {
+        // Singleton prevents multiple instances of database opening at the
+        // same time.
+        @Volatile
+        private var INSTANCE: CarbRoomDatabase? = null
 
-        /**
-         * The only instance
-         */
-        private var sInstance: AppDatabase? = null
-
-        /**
-         * Gets the singleton instance of SampleDatabase.
-         *
-         * @param context The context.
-         * @return The singleton instance of SampleDatabase.
-         */
-        @Synchronized
-        fun getInstance(context: Context): AppDatabase {
-            if (sInstance == null) {
-                sInstance = Room
-                        .databaseBuilder(context.applicationContext, AppDatabase::class.java, "example")
-                        .fallbackToDestructiveMigration()
-                        .build()
+        fun getDatabase(context: Context): CarbRoomDatabase {
+            val tempInstance = INSTANCE
+            if (tempInstance != null) {
+                return tempInstance
             }
-            return sInstance!!
+            synchronized(this) {
+                val instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        //CarbRoomDatabase::class.java, //ES
+                        CarbRoomDatabase::class.java,
+                        "carb_database"
+                ).build()
+                INSTANCE = instance
+                return instance
+            }
         }
     }
 }

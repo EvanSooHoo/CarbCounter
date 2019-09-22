@@ -1,7 +1,7 @@
 package com.first.evansoohoo.carbcounter
 
 import kotlinx.android.synthetic.main.activity_main.*
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.os.Bundle
 import android.widget.Button
