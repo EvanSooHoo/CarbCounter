@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         var sum:  Int = 0
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
         button.setOnClickListener {
             var inputInt: Int = carbInput.text.toString().toInt()
@@ -30,9 +31,13 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this,Integer.toString(sum),Toast.LENGTH_LONG).show()
         }
 
+
+/*
         button2.setOnClickListener {
             Log.d("TAG", "ES: You hit the save button")
         }
+        */
+
     }
 
 }
