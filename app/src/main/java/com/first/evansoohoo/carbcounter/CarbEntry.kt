@@ -7,4 +7,4 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "carb_table")
-class CarbEntry(@PrimaryKey @ColumnInfo(name = "carbentry") val word: Int)
+class CarbEntry(@PrimaryKey @ColumnInfo(name = "carbentry") val content: Int)

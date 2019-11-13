@@ -23,6 +23,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         var sum:  Int = 0
+        val db = Room.databaseBuilder(
+                applicationContext,
+                CarbRoomDatabase::class.java, "CarbEntry.db"
+        ).build()
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_main)
@@ -34,26 +38,36 @@ class MainActivity : AppCompatActivity() {
 
         button2.setOnClickListener {
             Log.d("TAG", "ES: You hit the save button")
-            val db = Room.databaseBuilder(
-                    applicationContext,
-                    CarbRoomDatabase::class.java, "CarbEntry.db"
-            ).build()
+
 
             GlobalScope.launch {
-                db.CarbEntry().insert(CarbEntry(sum))
+                Log.d("TAG", "ES: Inside globalscope launch")
+                db.CarbEntry().insert(CarbEntry(sum)) //TODO: Put back
+
+                //Log.d("TAG", "ES: Now testing the other insert")
+                //db.CarbEntry().insertAll(CarbEntry(sum))
+                Log.d("TAG", "ES: Now testing getall")
+                var data = db.CarbEntry().getAll()
+
+                data?.forEach {
+                    println(it.content)
+                }
 
             }
             Log.d("TAG", "ES: Attempted to save sum " + sum + " into database")
+
+            var data = db.CarbEntry().getAllCarbEntries()
+
+
+            Log.d("TAG", "ES (TEST WITHIN BUTTON 2 METHOD): Size of carb entries database is now " + (data.value?.size))
         }
 
         button3.setOnClickListener {
             Log.d("TAG", "ES: You hit the previous entries list")
-            val db = Room.databaseBuilder(
-                    applicationContext,
-                    CarbRoomDatabase::class.java, "CarbEntry.db"
-            ).build()
 
             var data = db.CarbEntry().getAllCarbEntries()
+
+
             Log.d("TAG", "ES: Size of carb entries database is now " + (data.value?.size))
 
 
