@@ -18,6 +18,7 @@ import android.widget.*
 import androidx.room.Room
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,8 +42,11 @@ class MainActivity : AppCompatActivity() {
 
 
             GlobalScope.launch {
+
                 Log.d("TAG", "ES: Inside globalscope launch")
-                db.CarbEntry().insert(CarbEntry(sum)) //TODO: Put back
+                var carbStringVersion:String = sum.toString()
+                carbStringVersion += " recorded on date " + LocalDateTime.now()
+                db.CarbEntry().insert(CarbEntry(carbStringVersion)) //TODO: Put back
 
                 //Log.d("TAG", "ES: Now testing the other insert")
                 //db.CarbEntry().insertAll(CarbEntry(sum))

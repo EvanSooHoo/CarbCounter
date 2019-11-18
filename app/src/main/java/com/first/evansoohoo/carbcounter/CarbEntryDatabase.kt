@@ -6,9 +6,11 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
+
 // Annotates class to be a Room Database with a table (entity) of the Carb class
 @Database(entities = arrayOf(CarbEntry::class), version = 1, exportSchema = false)
 public abstract class CarbRoomDatabase : RoomDatabase() {
+
 
     abstract fun CarbEntry(): CarbEntryDAO
 
@@ -24,12 +26,9 @@ public abstract class CarbRoomDatabase : RoomDatabase() {
                 return tempInstance
             }
             synchronized(this) {
-                val instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        //CarbRoomDatabase::class.java, //ES
-                        CarbRoomDatabase::class.java,
-                        "carb_database"
-                ).build()
+                val instance =
+                        Room.databaseBuilder(context.applicationContext, CarbRoomDatabase::class.java, "carb_database")
+                .build();
                 INSTANCE = instance
                 return instance
             }
