@@ -64,14 +64,13 @@ class MainActivity : AppCompatActivity() {
 
         button3.setOnClickListener {
             Log.d("TAG", "ES: You hit the previous entries list")
+            GlobalScope.launch {
+                var data = db.CarbEntry().getAll()
 
-            var data = db.CarbEntry().getAllCarbEntries()
-
-
-            Log.d("TAG", "ES: Size of carb entries database is now " + (data.value?.size))
-
-
-            Log.d("TAG", "ES: Value of saved entry at end is " + (data.getValue()?.get(0)))
+                data?.forEach {
+                    println(it.content)
+                }
+            }
         }
 
 
