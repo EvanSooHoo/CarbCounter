@@ -6,9 +6,9 @@ Consider this Carb Counter version 1.0
 
 ## Features
 
-*Adds up number of carbs for a day
-*Saves total number of carbs in a database that leverages Room
-*Displays results with timestamp in simple textview
+* Adds up number of carbs for a day
+* Saves total number of carbs in a database that leverages Room
+* Displays results with timestamp in simple textview
 
 ## Future plans:
 
