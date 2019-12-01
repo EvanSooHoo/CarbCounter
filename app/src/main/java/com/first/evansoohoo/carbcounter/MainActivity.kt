@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
 class MainActivity : AppCompatActivity() {
-
+    var displayText = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         var sum:  Int = 0
         val db = Room.databaseBuilder(
@@ -68,13 +68,19 @@ class MainActivity : AppCompatActivity() {
 
         button3.setOnClickListener {
             Log.d("TAG", "ES: You hit the previous entries list")
+
             GlobalScope.launch {
                 var data = db.CarbEntry().getAll()
 
                 data?.forEach {
+                    displayText += it.content
+                    displayText += "\n"
                     println(it.content)
                 }
             }
+            carbEntryDisplay.text = displayText
+            Log.d("TAG", "Value of carbEntryDisplay.text is " + carbEntryDisplay.text)
+
         }
 
 
