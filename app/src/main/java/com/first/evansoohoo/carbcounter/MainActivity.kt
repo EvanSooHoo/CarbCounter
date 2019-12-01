@@ -83,6 +83,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+        button4.setOnClickListener {
+            GlobalScope.launch {
+                db.CarbEntry().deleteAll()
+            }
+        }
+
 
     }
 
